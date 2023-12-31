@@ -1,0 +1,69 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" 
+        xmlns:vm="using:NoteGenerator.ViewModels"
+        d:DesignWidth="500" 
+        d:DesignHeight="450"
+        MinHeight="300" 
+        MinWidth="450"
+        Height="500"
+        Width="800"
+        x:Class="NoteGenerator.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="NoteGenerator">
+    <DockPanel LastChildFill="True"> 
+        <UniformGrid Rows="1"
+                     Columns="3"
+                     VerticalAlignment="Top"
+                     HorizontalAlignment="Stretch"
+                     Margin="10,10,10,5"
+                     DockPanel.Dock="Top">
+            <RadioButton Content="Full Notes"                     
+                         Grid.Column="0"
+                         IsChecked="{Binding FullNoteSelection, Mode=TwoWay}" />
+            <RadioButton Content="Half Notes"  
+                         Grid.Column="1" 
+                         IsChecked="{Binding HalfNoteSelection, Mode=TwoWay}" />
+            <RadioButton Content="All Notes"  
+                         Grid.Column="2" 
+                         IsChecked="{Binding AllNoteSelection, Mode=TwoWay}" />
+        </UniformGrid>
+
+        <DockPanel DockPanel.Dock="Top" 
+                   Margin="10,5,10,5" 
+                   LastChildFill="True" >
+            <TextBlock Text="How many times would you like the notes to repeat?" 
+                       Margin="0,0,10,0" 
+                       DockPanel.Dock="Left"
+                       VerticalAlignment="Center" />
+            <NumericUpDown HorizontalAlignment="Stretch"
+                           x:Name="tbxRepeats"
+                           AllowSpin="True"
+                           DockPanel.Dock="Left"
+                           VerticalAlignment="Stretch"
+                           Increment="1"
+                           Minimum="0"
+                           ButtonSpinnerLocation="Left"
+                           Value="{Binding Repeats}" />
+        </DockPanel>
+
+        <Button Content="Generate Notes" 
+                Margin="10,5,10,5"  
+                Height="35"
+                DockPanel.Dock="Top"
+                VerticalAlignment="Stretch"
+                Command="{Binding GenerateCommand}"
+                HorizontalAlignment="Stretch" />
+
+        <TextBox Margin="10,5,10,5"
+                 TextWrapping="Wrap"
+                 FontSize="40"
+                 IsReadOnly="True"
+                 VerticalAlignment="Stretch" 
+                 Text="{Binding ResultNotes}"
+                 HorizontalAlignment="Stretch" />
+    </DockPanel>         
+</Window>
